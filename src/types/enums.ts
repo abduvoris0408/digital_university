@@ -7,6 +7,7 @@ export const PERMISSIONS = {
 } as const
 export type PERMISSIONS = (typeof PERMISSIONS)[keyof typeof PERMISSIONS]
 export const ROLE = {
+	SUPERADMIN: 'SUPERADMIN',
 	ADMIN: 'ADMIN',
 	TEACHER: 'TEACHER',
 } as const

@@ -18,5 +18,4 @@ export const UserPermissions = getLoadablePage(
 export const Certificates = getLoadablePage(
 	'Certificates',
 	'certificates/certificates'
-	
 )

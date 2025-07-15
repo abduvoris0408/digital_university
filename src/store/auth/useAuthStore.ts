@@ -6,6 +6,7 @@ type AuthState = {
 	refreshToken: string | null
 	isAuth: boolean
 	isInitiated: boolean
+	user: IUser | null
 	setTokens: (access: string, refresh: string) => void
 	clearTokens: () => void
 	setIsAuth: (auth: boolean) => void
@@ -19,6 +20,7 @@ export const useAuthStore = create<AuthState>()(set => ({
 	refreshToken: localStorage.getItem('refreshToken'),
 	isAuth: false,
 	isInitiated: false,
+	user: null,
 
 	setTokens: (access, refresh) => {
 		localStorage.setItem('accessToken', access)
@@ -50,6 +52,7 @@ export const useAuthStore = create<AuthState>()(set => ({
 			accessToken: null,
 			refreshToken: null,
 			isAuth: false,
+			user: null,
 		})
 	},
 }))

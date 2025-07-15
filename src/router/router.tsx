@@ -1,7 +1,5 @@
 import { useRoutes } from 'react-router-dom'
-
 import { ROUTES } from '../constants/routes'
-import { Protected } from './protected'
 import { createIndexRoute, createRoute } from './util'
 
 import { Layout } from '../layout/layout'
@@ -13,6 +11,7 @@ import {
 	UserPermissions,
 	UsersList,
 } from './loadable'
+import { Protected } from './protected'
 import { Public } from './public'
 
 export const Router = () => {
@@ -23,7 +22,7 @@ export const Router = () => {
 		},
 
 		{
-			element: <Protected />,
+			element: <Protected isAuth={true} role={['SUPERADMIN', 'ADMIN']} />,
 			children: [
 				createRoute('/', <Layout />, [
 					// Dashboard
@@ -35,8 +34,9 @@ export const Router = () => {
 					///users
 					createRoute(ROUTES.users.root, null, [
 						createRoute(ROUTES.users.list, <UsersList />),
-
-						createRoute(ROUTES.users.role, <UserPermissions />),
+					]),
+					createRoute(ROUTES.permissions, null, [
+						createIndexRoute(<UserPermissions />),
 					]),
 					createRoute(ROUTES.certificates, null, [
 						createIndexRoute(<Certificates />),

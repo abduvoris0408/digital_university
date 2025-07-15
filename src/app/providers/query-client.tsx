@@ -4,9 +4,9 @@ import {
 	QueryClientProvider,
 } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
-import { errorMessage } from '../../utils/messages'
 import type { PropsWithChildren } from 'react'
 import type { TError } from '../../types/app'
+import { errorMessage } from '../../utils/messages'
 
 const axiosErrorHandler = (error: Error | AxiosError<TError>) => {
 	if (axios.isAxiosError(error)) {

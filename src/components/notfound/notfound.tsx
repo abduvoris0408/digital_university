@@ -1,4 +1,5 @@
-import { Empty } from 'antd'
+import { Button, Empty } from 'antd'
+import { Box } from '../box'
 
 export const NotFound = () => {
 	return (

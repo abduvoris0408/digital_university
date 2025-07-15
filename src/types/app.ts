@@ -13,6 +13,7 @@ export interface IAppStore {
 	previewImage: string
 	previewTitle: string
 	language: TLanguages
+	action: Action
 
 	setSearch: (search: string) => void
 	setHistory: ({ action, location }: THistory) => void
@@ -59,14 +60,5 @@ export type TDataWithLangs = {
 	en: string
 	ru: string
 	uz: string
-}
-
-export type TQuizStore = {
-	idChekedFromRequest: number
-	multipleIdChecked: number[]
-	isTeacher: boolean
-	setIdChekedFromRequest: (id: number) => void
-	setMultipleIdChecked: (id: number[]) => void
-	setQuizIsTeacher: (isTeacher: boolean) => void
 }
 export type TError = { error: string; message: string; statusCode: number }

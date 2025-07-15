@@ -45,6 +45,7 @@ export interface IUser {
 	created_at: string
 	title: string | null
 	permissions?: TPermissions[]
+	user:string
 }
 
 export interface UpdateUserRequest {

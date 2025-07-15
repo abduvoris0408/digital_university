@@ -16,7 +16,7 @@ const App = () => {
 			</div>
 		)
 	}
-			
+
 	return (
 		<>
 			<QueryProvider>

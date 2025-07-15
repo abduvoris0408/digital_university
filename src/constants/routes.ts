@@ -10,5 +10,30 @@ export const ROUTES = {
 		groups: 'groups',
 		role: 'role',
 	},
+
 	certificates: '/certificates',
+
+	permissions: '/permissions',
+
+	educationSettings: {
+		root: '/education-settings',
+		academicHour: 'academic-hour',
+		buildings: 'buildings',
+		floors: 'floors',
+		roomType: 'room-type',
+		rooms: 'rooms',
+	},
+
+	contracts: {
+		root: '/contracts',
+		courseTypes: 'course-types',
+		contractTypes: 'contract-types',
+		groupContract: 'group-contract',
+		legalContract: 'legal-contract',
+		physicalContract: 'physical-contract',
+	},
+
+	teachers: '/teachers',
+	students: '/students',
+	education: '/education',
 } as const

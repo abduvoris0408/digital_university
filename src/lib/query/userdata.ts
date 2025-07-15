@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import type { AxiosRequestConfig } from 'axios'
-import { api } from '../services/api'
 import type { IUser } from '../../types/user'
+import { api } from '../services/api'
 
 interface UseGetOneDataProps {
 	queryKey: string[] | string
-	url?: string // optional, agar guid kerak bo‘lsa
-	useGuidFromMe?: boolean // true bo‘lsa, /base/me dan guid oladi
+	url?: string
+	useGuidFromMe?: boolean
 	enabled?: boolean
 	params?: Record<string, any>
 	config?: AxiosRequestConfig
@@ -33,7 +33,6 @@ export const useGetOneData = <T = any>({
 		queryFn: async (): Promise<T> => {
 			let finalUrl = url
 
-			// Agar guid kerak bo‘lsa — /base/me orqali olib kelamiz
 			if (useGuidFromMe) {
 				const meRes = await api.get<ApiResponse<IUser[]>>('/base/me/')
 				if (meRes.data.status_code !== 200 || !meRes.data.data.length) {
