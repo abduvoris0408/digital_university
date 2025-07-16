@@ -74,22 +74,33 @@ export const ProfileDropdown = () => {
 					}),
 				}}
 				trigger={['hover']}
-				overlayStyle={{ width: 250 }}
+				overlayStyle={{ width: 150 }}
 				forceRender
 			>
 				<Flex
 					gap='small'
 					align='center'
-					style={{ marginLeft: 10, cursor: 'pointer' }}
+					justify='center'
+					style={{ marginLeft: 0, cursor: 'pointer', width: 150 }}
 				>
 					<Avatar
 						size={42}
 						src={userInfo?.photo}
 						icon={<UserOutlined />}
-						style={{ backgroundColor: colorPrimary }}
 					/>
-					<Flex vertical>
-						<Text>{getFullName()}</Text>
+					<Flex
+						vertical
+						style={{ maxWidth: 100, overflow: 'hidden' }}
+					>
+						<Text
+							style={{
+								whiteSpace: 'nowrap',
+								overflow: 'hidden',
+								textOverflow: 'ellipsis',
+							}}
+						>
+							{getFullName()}
+						</Text>
 						<Tag color='green'>{roleText}</Tag>
 					</Flex>
 				</Flex>

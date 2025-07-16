@@ -1,7 +1,7 @@
 import Lottie from 'lottie-react'
-import animationData from '../../assets/lottie1.json'
+import animationData from '../../assets/register.json'
 
-const WelcomeAnimation = () => {
+const SignUpAnimation = () => {
 	return (
 		<div style={{ width: 300, margin: '0 auto' }}>
 			<Lottie animationData={animationData} loop={true} />
@@ -9,4 +9,4 @@ const WelcomeAnimation = () => {
 	)
 }
 
-export default WelcomeAnimation
+export default SignUpAnimation

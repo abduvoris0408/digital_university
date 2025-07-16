@@ -26,17 +26,35 @@ export const profileModalMenu = ({ onClicks }: ModalProps): ItemType[] => [
 
 export const languageModalMenu = [
 	{
+		key: 'uz',
 		icon: (
-			<img
-				src={
-					'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.advantour.com%2Fuzbekistan%2Fflag.htm&psig=AOvVaw0niGZ8mpLOQgaFke1pYGo2&ust=1752042687040000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCPCRk-LRrI4DFQAAAAAdAAAAABAE'
-				}
-				width={16}
-				height={16}
-			/>
+			<img src='https://flagcdn.com/h20/uz.png' height='20' alt='Uzbek' />
 		),
 		label: "O'zbekcha",
-		key: 'uz',
+	},
+	{
+		key: 'ru',
+		icon: (
+			<img
+				src='https://flagcdn.com/h20/ru.png'
+				height='20'
+				width='40'
+				alt='Russian'
+			/>
+		),
+		label: 'Русский',
+	},
+	{
+		key: 'en',
+		icon: (
+			<img
+				src='https://flagcdn.com/h20/us.png'
+				height='20'
+				width='40'
+				alt='English'
+			/>
+		),
+		label: 'English',
 	},
 ]
 

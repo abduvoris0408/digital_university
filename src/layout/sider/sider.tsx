@@ -15,9 +15,11 @@ export const Sider = ({ collapsed, setCollapsed }: Props) => {
 			style={{
 				background: 'white',
 				height: '100%',
+				flex: 1,
+				overflowY: 'scroll',
 			}}
 		>
-			<div className=' px-4 py-3'>
+			<div className='px-4 py-3 '>
 				<Link to='/dashboard' className='flex items-center gap-2'>
 					<img
 						src='/src/assets/images/logo.jpg'

@@ -35,3 +35,7 @@ export type TTextProps = {
 	$notSansSerif?: boolean
 	$font?: string
 }
+export type TButtonProps = {
+	label?: string
+	icon?: React.JSX.Element
+} & ButtonProps

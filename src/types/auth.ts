@@ -3,6 +3,8 @@ import type { PERMISSIONS, ROLE } from './enums'
 export type TLogin = {
 	username: string
 	password: string
+	captcha?: string
+	captcha_key?: string
 }
 
 export type TTokens = {

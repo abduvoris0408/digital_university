@@ -1,7 +1,12 @@
-import { Button, Card, Popconfirm, Space, Table, Tag, Typography } from 'antd'
+import { Button, Card, message, Popconfirm, Space, Table, Tag, Typography } from 'antd'
 import { useState } from 'react'
 
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
+import {
+	DeleteOutlined,
+	EditOutlined,
+	EyeOutlined,
+	PlusOutlined,
+} from '@ant-design/icons'
 import {
 	useCreateUser,
 	useDeleteUser,
@@ -17,6 +22,7 @@ export const UserList = () => {
 	const { data: users, isLoading } = useUsers()
 	const [drawerOpen, setDrawerOpen] = useState(false)
 	const [editingUser, setEditingUser] = useState<IUser | null>(null)
+	const [viewMode, setViewMode] = useState(false)
 
 	const createUser = useCreateUser()
 	const updateUser = useUpdateUser(editingUser?.guid || '')
@@ -24,24 +30,51 @@ export const UserList = () => {
 
 	const handleEdit = (user: IUser) => {
 		setEditingUser(user)
+		setViewMode(false)
+		setDrawerOpen(true)
+	}
+	const handleView = (user: IUser) => {
+		setEditingUser(user)
+		setViewMode(true)
 		setDrawerOpen(true)
 	}
 
-	const handleDelete = (guid: string) => {
-		deleteUser.mutate(guid)
-	}
+const handleDelete = (guid: string) => {
+	deleteUser.mutate(guid, {
+		onSuccess: () => {
+			message.success('Foydalanuvchi o‘chirildi')
+		},
+		onError: () => {
+			message.error('O‘chirishda xatolik yuz berdi')
+		},
+	})
+}
 
-	const handleSubmit = (data: any) => {
-		if (editingUser) {
-			updateUser.mutate(data, {
-				onSuccess: () => setDrawerOpen(false),
-			})
-		} else {
-			createUser.mutate(data, {
-				onSuccess: () => setDrawerOpen(false),
-			})
-		}
+
+const handleSubmit = (data: any) => {
+	if (editingUser) {
+		updateUser.mutate(data, {
+			onSuccess: () => {
+				message.success('Foydalanuvchi tahrirlandi')
+				setDrawerOpen(false)
+			},
+			onError: () => {
+				message.error('Tahrirlashda xatolik yuz berdi')
+			},
+		})
+	} else {
+		createUser.mutate(data, {
+			onSuccess: () => {
+				message.success('Foydalanuvchi qo‘shildi')
+				setDrawerOpen(false)
+			},
+			onError: () => {
+				message.error('Qo‘shishda xatolik yuz berdi')
+			},
+		})
 	}
+}
+
 
 	const columns = [
 		{
@@ -84,6 +117,11 @@ export const UserList = () => {
 			title: 'Amallar',
 			render: (_: any, row: IUser) => (
 				<Space>
+					<Button
+						type='link'
+						onClick={() => handleView(row)}
+						icon={<EyeOutlined />}
+					/>
 					<Button
 						type='link'
 						icon={<EditOutlined />}

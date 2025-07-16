@@ -1,5 +1,6 @@
 export const ROUTES = {
 	login: '/login',
+	signup: '/signup',
 	dashboard: '/dashboard',
 	profile: '/profile',
 
@@ -8,7 +9,12 @@ export const ROUTES = {
 		list: 'list',
 		add: 'add',
 		groups: 'groups',
-		role: 'role',
+		roleRoutes: {
+			root: '/role',
+			create: '/role/create',
+			edit: (guid: string) => `/role/edit/${guid}`,
+			view: (guid: string) => `/role/view/${guid}`,
+		},
 	},
 
 	certificates: '/certificates',

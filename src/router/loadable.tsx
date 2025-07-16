@@ -2,6 +2,7 @@ import { getLoadablePage } from './util'
 
 // auth
 export const Auth = getLoadablePage('Login', 'auth/login')
+export const SignUp = getLoadablePage('SignUp', 'auth/signup')
 
 // pages
 export const Dashboard = getLoadablePage('Dashboard', 'dashboard/dashboard')

@@ -112,7 +112,6 @@
 // 	)
 // }
 
-
 import { DownOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
@@ -127,7 +126,7 @@ type Props = {
 
 export const Menu = ({ collapsed = false }: Props) => {
 	const { decodedPathname } = usePathname()
-	const menuItems = useMenuItems() // 🟢 DINAMIK MENULAR
+	const menuItems = useMenuItems()
 
 	const { selectedKeys, defaultOpenKeys } = useMemo(() => {
 		const currentPath = decodedPathname
@@ -169,27 +168,29 @@ export const Menu = ({ collapsed = false }: Props) => {
 	}
 
 	return (
-		<AntMenu
-			className='px-4 py-4'
-			expandIcon={({ isOpen }) => (
-				<DownOutlined
-					className='expanded-icon'
-					style={{
-						transform: `rotate(${isOpen ? '180deg' : 0})`,
-						fontSize: 10,
-						width: 10,
-						minWidth: 10,
-					}}
-				/>
-			)}
-			items={menuItems}
-			selectedKeys={selectedKeys}
-			openKeys={openKeys}
-			onOpenChange={handleOpenChange}
-			onClick={handleClick}
-			mode='inline'
-			style={{ height: '100%' }}
-			inlineCollapsed={collapsed}
-		/>
+		<div>
+			<AntMenu
+				className='px-2'
+				expandIcon={({ isOpen }) => (
+					<DownOutlined
+						className='expanded-icon'
+						style={{
+							transform: `rotate(${isOpen ? '180deg' : 0})`,
+							fontSize: 10,
+							width: 10,
+							minWidth: 10,
+						}}
+					/>
+				)}
+				items={menuItems}
+				selectedKeys={selectedKeys}
+				openKeys={openKeys}
+				onOpenChange={handleOpenChange}
+				onClick={handleClick}
+				mode='inline'
+				style={{ height: '100%' }}
+				inlineCollapsed={collapsed}
+			/>
+		</div>
 	)
 }

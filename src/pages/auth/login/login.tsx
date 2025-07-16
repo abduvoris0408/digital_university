@@ -10,16 +10,33 @@ import {
 	Typography,
 	type FormProps,
 } from 'antd'
+import { useState } from 'react'
 import WelcomeAnimation from '../../../components/lottie/WelcomeAnimation'
+import { useCaptcha } from '../../../lib/query/useCaptcha'
 import { useLogin } from '../../../lib/services/mutations/loginMutations'
 import type { TLogin } from '../../../types/auth'
 
 const { Title, Text, Link } = Typography
 
 export const Login = () => {
+	const [attempts, setAttempts] = useState(0)
+	const showCaptcha = attempts >= 3
+
+	const { data: captcha, refetch: refetchCaptcha } = useCaptcha(showCaptcha)
+
 	const { mutate, isPending } = useLogin()
+	const [form] = Form.useForm()
+
 	const onFinish: FormProps<TLogin>['onFinish'] = values => {
-		mutate(values)
+		if (showCaptcha && captcha?.key) {
+			values.captcha_key = captcha.key
+		}
+		mutate(values, {
+			onError: () => {
+				setAttempts(prev => prev + 1)
+				if (attempts + 1 >= 3) refetchCaptcha()
+			},
+		})
 	}
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -27,22 +44,16 @@ export const Login = () => {
 	}
 
 	return (
-		<Row
-			style={{
-				minHeight: '100vh',
-				overflow: 'hidden',
-			}}
-		>
+		<Row style={{ minHeight: '100vh', overflow: 'hidden' }}>
 			<Col xs={24} lg={12}>
 				<Flex
 					vertical
 					align='center'
 					justify='center'
-					className='text-center'
 					style={{
 						height: '100%',
 						padding: '1rem',
-						backgroundColor: '#007BFF	',
+						backgroundColor: '#007BFF',
 					}}
 				>
 					<WelcomeAnimation />
@@ -70,16 +81,12 @@ export const Login = () => {
 				>
 					<Title className='m-0'>Tizimga kirish</Title>
 
-					<Flex gap={8} style={{ marginBottom: '1rem' }}>
-						<Text>Akkauntingiz yo‘qmi?</Text>
-						<Link href={'/signup'}>Ro‘yxatdan o‘ting</Link>
-					</Flex>
-
 					<Form
+						form={form}
 						name='sign-in-form'
 						layout='vertical'
 						initialValues={{
-							email: '',
+							username: '',
 							password: '',
 							remember: true,
 						}}
@@ -89,13 +96,13 @@ export const Login = () => {
 						requiredMark={false}
 						style={{ width: '100%', maxWidth: 400 }}
 					>
-						<Form.Item<TLogin>
+						<Form.Item
 							name='username'
-							label='Loginingizni kiriting'
+							label='Login'
 							rules={[
 								{
 									required: true,
-									message: ' kiriting',
+									message: 'Loginingizni kiriting',
 								},
 							]}
 						>
@@ -107,7 +114,7 @@ export const Login = () => {
 							/>
 						</Form.Item>
 
-						<Form.Item<TLogin>
+						<Form.Item
 							label='Parol'
 							name='password'
 							rules={[
@@ -125,12 +132,40 @@ export const Login = () => {
 							/>
 						</Form.Item>
 
+						{showCaptcha && captcha && (
+							<>
+								<Form.Item
+									name='captcha_value'
+									label='Captcha'
+									rules={[
+										{
+											required: true,
+											message: 'Captcha ni kiriting',
+										},
+									]}
+								>
+									<Flex align='center' gap={8}>
+										<Input placeholder='Captcha' />
+										<img
+											src={captcha.image}
+											alt='captcha'
+											style={{
+												height: 40,
+												cursor: 'pointer',
+											}}
+											onClick={() => refetchCaptcha()}
+										/>
+									</Flex>
+								</Form.Item>
+							</>
+						)}
+
 						<Flex
 							justify='space-between'
 							align='center'
 							style={{ marginBottom: 24 }}
 						>
-							<Form.Item<TLogin> valuePropName='checked' noStyle>
+							<Form.Item valuePropName='checked' noStyle>
 								<Checkbox>Meni eslab qol</Checkbox>
 							</Form.Item>
 							<Link
@@ -153,6 +188,15 @@ export const Login = () => {
 								Tizimga kirish
 							</Button>
 						</Form.Item>
+						<Flex
+							align='center'
+							justify='center'
+							gap={8}
+							style={{ marginBottom: '1rem' }}
+						>
+							<Text>Akkauntingiz yo‘qmi?</Text>
+							<Link href={'#/signup'}>Ro‘yxatdan o‘ting</Link>
+						</Flex>
 					</Form>
 				</Flex>
 			</Col>

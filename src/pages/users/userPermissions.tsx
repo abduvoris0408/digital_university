@@ -20,9 +20,9 @@ import {
 } from 'antd'
 import { debounce } from 'lodash-es'
 import { useCallback, useState } from 'react'
+import { useDeleteRole, useRoles } from '../../lib/query/useRoles'
 import type { Role } from '../../types/role'
 import RoleForm from './components/RoleForm'
-import { useDeleteRole, useRoles } from '../../lib/query/useRoles'
 
 const { Title } = Typography
 
@@ -125,7 +125,7 @@ export const UserPermissions: React.FC = () => {
 						icon={<EditOutlined />}
 						onClick={() => handleEdit(record.guid!)}
 						title='Tahrirlash'
-						style={{ color: '#faad14' }}
+						style={{ color: '#1dba1a' }}
 					/>
 					<Popconfirm
 						title="Rolni o'chirish"

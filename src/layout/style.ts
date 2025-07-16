@@ -36,11 +36,10 @@ export const LayoutSider = styled(Layout.Sider)<SiderProps>`
 		theme == 'light'
 			? '0px 2px 4px 0px #00000005, 0px 1px 6px -1px #00000005, 0px 1px 2px 0px #00000008;'
 			: '0px 2px 4px 0px #ffffff05, 0px 1px 6px -1px #ffffff05, 0px 1px 2px 0px #ffffff08;'}
-    z-index: 999;
+    z-index: 998;
 `
 
 export const AntMenu = styled(Menu)`
-	// custom styles bu yerda
 	background-color: #fff;
 	border-right: none;
 `

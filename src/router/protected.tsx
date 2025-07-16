@@ -28,7 +28,6 @@ export const Protected: FC<AuthProps> = ({ role }) => {
 	const isAllowed = user && checkRole(user.role, allowedRoles, logout)
 	useEffect(() => {
 		if (isAuth && isInitiated && user && !isAllowed) {
-			console.log('❌ Role not allowed, logging out...')
 			logout()
 		}
 	}, [isAuth, isInitiated, user, isAllowed, logout])

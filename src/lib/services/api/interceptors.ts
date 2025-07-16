@@ -74,7 +74,6 @@ export const errorInterceptor = async (error: AxiosError): Promise<never> => {
 			}
 		}
 	} else {
-		// 💡 Boshqa status kodlar (403, 500 va h.k.)
 		const errorText =
 			error.response?.data?.message ||
 			error.response?.statusText ||

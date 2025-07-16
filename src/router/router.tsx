@@ -8,6 +8,7 @@ import {
 	Certificates,
 	Dashboard,
 	Profile,
+	SignUp,
 	UserPermissions,
 	UsersList,
 } from './loadable'
@@ -18,11 +19,19 @@ export const Router = () => {
 	return useRoutes([
 		{
 			element: <Public />,
-			children: [createRoute(ROUTES.login, <Auth />)],
+			children: [
+				createRoute(ROUTES.login, <Auth />),
+				createRoute(ROUTES.signup, <SignUp />),
+			],
 		},
 
 		{
-			element: <Protected isAuth={true} role={['SUPERADMIN', 'ADMIN']} />,
+			element: (
+				<Protected
+					isAuth={true}
+					role={['SUPERADMIN', 'ADMIN', 'TINGLOVCHI']}
+				/>
+			),
 			children: [
 				createRoute('/', <Layout />, [
 					// Dashboard
